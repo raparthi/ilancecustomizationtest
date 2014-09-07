@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title ilancecustomization
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container
+      #header
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            = link_to 'HOME', root_path
+          %li
+            - if user_signed_in?
+              = link_to 'SIGN OUT', destroy_user_session_path, method: :delete
+            - else
+              = link_to 'SIGN IN', new_user_session_path
+      #main-content
+        = yield
+      #footer
+        = render 'layouts/footer'
